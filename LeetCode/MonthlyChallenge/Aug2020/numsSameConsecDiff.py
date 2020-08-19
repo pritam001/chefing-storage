@@ -72,3 +72,35 @@ class Solution:
 
 solution = Solution().numsSameConsecDiff(1, 1)
 print(solution)
+
+"""
+Better approach:
+
+We initial the current result with all 1-digit numbers,
+like cur = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].
+
+Each turn, for each x in cur,
+we get its last digit y = x % 10.
+If y + K < 10, we add x * 10 + y + K to the new list.
+If y - K >= 0, we add x * 10 + y - K to the new list.
+
+We repeat this step N - 1 times and return the final result.
+
+Complexity
+
+If K >= 5, time and Space O(N)
+If K <= 4, time and space O(2^n)
+"""
+
+
+def numsSameConsecDiff(self, N, K):
+    cur = range(10)
+    for i in range(N - 1):
+        cur = {x * 10 + y for x in cur for y in [x % 10 + K, x % 10 - K] if x and 0 <= y < 10}
+    return list(cur)
+
+
+"""
+Complexity analysis:
+
+"""
