@@ -17,7 +17,7 @@ Given 1->2->3->4->5, reorder it to 1->5->2->4->3.
 import unittest
 
 # Definition for singly-linked list.
-from typing import List
+from typing import List, Tuple
 
 
 class ListNode:
@@ -26,7 +26,7 @@ class ListNode:
         self.next = next
 
 
-class Solution:
+class SolutionOld:
     def reorderList(self, head: ListNode) -> None:
         """
         Do not return anything, modify head in-place instead.
@@ -49,6 +49,73 @@ class Solution:
             node_dict[j].next = i_next
             node_dict[j - 1].next = j_next
             j -= 1
+
+
+class Solution:
+    # TODO: complete
+    def reorderList(self, head: ListNode) -> None:
+        """
+        Do not return anything, modify head in-place instead.
+        """
+
+        def get_middle(starting_node) -> Tuple[ListNode, ListNode]:
+            a1 = starting_node
+            a2 = starting_node
+            while a1.next is not None:
+                prev_a1 = a1
+                a1 = a1.next
+                a2 = a2.next.next if a2.next is not None else None
+                if a2 is None:
+                    return prev_a1, a1
+                if a2.next is None:
+                    return a1, a1.next
+            return a1, a1.next
+
+        def reverse(starting_node: ListNode) -> ListNode:
+            start = starting_node
+            curr = starting_node
+            while curr.next is not None:
+                future = curr.next
+                future_next = future.next
+                future.next = curr
+                curr.next = future_next
+                start = future
+            return start
+
+        def join_linked_lists(a: ListNode, b: ListNode) -> ListNode:
+            curr_a = a
+            curr_b = b
+            while curr_a is not None and curr_b is not None:
+                next_a = curr_a.next
+                curr_a.next = curr_b
+                next_b = curr_b.next
+                curr_b.next = next_a
+                curr_b = next_b
+                curr_a = next_a
+            return a
+
+        if head is not None:
+            middle_node, next_to_middle_node = get_middle(head)
+            middle_node.next = None
+            print_linked_list(middle_node)
+            print_linked_list(next_to_middle_node)
+            if next_to_middle_node is not None:
+                reversed_list_node = reverse(next_to_middle_node)
+            else:
+                reversed_list_node = None
+            print_linked_list(reversed_list_node)
+            print_linked_list(head)
+            head = join_linked_lists(head, reversed_list_node)
+            print_linked_list(head)
+
+
+def print_linked_list(node: ListNode) -> None:
+    arr: List[int] = []
+    curr = node
+    while curr is not None:
+        arr.append(curr.val)
+        curr = curr.next
+    print(arr)
 
 
 class reorderListTests(unittest.TestCase):
@@ -84,21 +151,13 @@ class reorderListTests(unittest.TestCase):
         return linked_list
 
     @staticmethod
-    def printLinkedList(node: ListNode) -> None:
-        arr: List[int] = []
-        curr = node
-        while curr is not None:
-            arr.append(curr.val)
-            curr = curr.next
-        print(arr)
-
-    def printDebugData(self, a: ListNode, b: ListNode, c: ListNode) -> None:
+    def printDebugData(a: ListNode, b: ListNode, c: ListNode) -> None:
         print("input")
-        self.printLinkedList(a)
+        print_linked_list(a)
         print("expected")
-        self.printLinkedList(b)
+        print_linked_list(b)
         print("output")
-        self.printLinkedList(c)
+        print_linked_list(c)
 
     @staticmethod
     def get_output(head) -> None:
@@ -120,6 +179,39 @@ class reorderListTests(unittest.TestCase):
         a = self.createLinkedList([1, 2, 3, 4, 5])
         b = self.createLinkedList([1, 5, 2, 4, 3])
         c = self.createLinkedList([1, 2, 3, 4, 5])
+        self.get_output(c)
+
+        if not self.is_same(c, b):
+            self.printDebugData(a, b, c)
+
+        self.assertEqual(self.is_same(c, b), True)
+
+    def test3(self):
+        a = self.createLinkedList([1])
+        b = self.createLinkedList([1])
+        c = self.createLinkedList([1])
+        self.get_output(c)
+
+        if not self.is_same(c, b):
+            self.printDebugData(a, b, c)
+
+        self.assertEqual(self.is_same(c, b), True)
+
+    def test4(self):
+        a = self.createLinkedList([])
+        b = self.createLinkedList([])
+        c = self.createLinkedList([])
+        self.get_output(c)
+
+        if not self.is_same(c, b):
+            self.printDebugData(a, b, c)
+
+        self.assertEqual(self.is_same(c, b), True)
+
+    def test5(self):
+        a = self.createLinkedList([1, 2, 3, 4, 5, 6, 7])
+        b = self.createLinkedList([1, 7, 2, 6, 3, 5, 4])
+        c = self.createLinkedList([1, 2, 3, 4, 5, 6, 7])
         self.get_output(c)
 
         if not self.is_same(c, b):
