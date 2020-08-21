@@ -21,7 +21,7 @@ from typing import List
 import unittest
 
 
-class Solution:
+class Solution2:
     def sortArrayByParity(self, A: List[int]) -> List[int]:
         length: int = len(A)
         i: int = 0
@@ -41,6 +41,12 @@ class Solution:
             else:
                 i += 1
                 j -= 1
+        return A
+
+
+class Solution:
+    def sortArrayByParity(self, A: List[int]) -> List[int]:
+        A.sort(key=lambda x: x % 2)
         return A
 
 
