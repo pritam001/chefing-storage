@@ -47,10 +47,11 @@ Note:
 """
 import math
 import unittest
+from functools import lru_cache
 from typing import List
 
 
-class Solution:
+class Solution2:
     def minCostTickets(self, days: List[int], costs: List[int]) -> int:
         length: int = len(days)
         if length == 0:
@@ -75,6 +76,24 @@ class Solution:
         return cost[length - 1][0]
 
 
+class Solution:
+    def minCostTickets(self, days: List[int], costs: List[int]) -> int:
+        dayset = set(days)
+        durations = [1, 7, 30]
+
+        @lru_cache(None)
+        def dp(i):
+            if i > 365:
+                return 0
+            elif i in dayset:
+                return min(dp(i + d) + c
+                           for c, d in zip(costs, durations))
+            else:
+                return dp(i + 1)
+
+        return dp(1)
+
+
 class MinCostTicketsTests(unittest.TestCase):
 
     @staticmethod
@@ -94,6 +113,28 @@ class MinCostTicketsTests(unittest.TestCase):
         input_1: List[int] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 30, 31]
         input_2: List[int] = [2, 7, 15]
         expected_data: int = 17
+        output_data: int = self.get_output(input_1, input_2)
+        self.assertEqual(output_data, expected_data)
+
+    def test_3(self):
+        input_1: List[int] = [3, 7, 9, 11, 16, 17, 20, 21, 22, 23, 27, 28, 30, 33, 36, 37, 38, 39, 44, 46, 47, 52, 54,
+                              56, 57, 58, 59, 61, 62, 66, 67, 68, 69, 73, 75, 76, 77, 78, 82, 84, 85, 86, 89, 90, 91,
+                              93, 94, 96, 97, 98, 101, 104, 108, 110, 112, 114, 116, 117, 119, 122, 123, 125, 127, 128,
+                              129, 130, 133, 135, 137, 139, 142, 144, 145, 149, 151, 154, 158, 159, 161, 164, 167, 172,
+                              173, 174, 176, 177, 180, 181, 185, 187, 190, 191, 192, 193, 197, 201, 202, 205, 206, 208,
+                              211, 212, 217, 219, 220, 221, 222, 224, 225, 226, 229, 230, 232, 234, 237, 240, 243, 245,
+                              246, 249, 252, 254, 257, 258, 259, 261, 262, 264, 265, 267, 275, 281, 282, 285, 288, 289,
+                              290, 291, 293, 294, 296, 297, 298, 299, 302, 306, 307, 309, 311, 313, 314, 315, 316, 317,
+                              330, 334, 335, 337, 338, 339, 341, 344, 345, 346, 348, 349, 356, 357, 361]
+        input_2: List[int] = [30, 149, 476]
+        expected_data: int = 4776
+        output_data: int = self.get_output(input_1, input_2)
+        self.assertEqual(output_data, expected_data)
+
+    def test_4(self):
+        input_1: List[int] = [1, 4, 6, 7, 8, 20]
+        input_2: List[int] = [7, 2, 15]
+        expected_data: int = 6
         output_data: int = self.get_output(input_1, input_2)
         self.assertEqual(output_data, expected_data)
 
