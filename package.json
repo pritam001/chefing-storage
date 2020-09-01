@@ -1,0 +1,24 @@
+{
+  "name": "chefing-storage",
+  "version": "1.0.0",
+  "description": "Tracking programming challenge solutions @ 1. LeetCode 1. HackerEarth 1. CodeChef",
+  "main": "index.js",
+  "scripts": {
+    "cook": "",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pritam001/chefing-storage.git"
+  },
+  "author": "Pritam Sarkar <001pritam2012@gmail.com> (https://github.com/pritam001)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pritam001/chefing-storage/issues"
+  },
+  "homepage": "https://github.com/pritam001/chefing-storage#readme",
+  "dependencies": {
+    "@jest/globals": "26.4.2",
+    "jest-cli": "26.4.2"
+  }
+}
