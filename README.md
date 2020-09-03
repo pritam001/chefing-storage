@@ -10,6 +10,15 @@ Storage for resources:
 1. JavaScript, Java and Python guides
 1. Data Structure and Algorithms
 
+
+### Cheffing commands:
+1. npm run cook-js --problem=LeetCode/MonthlyChallenge/Sep2020/largestTimeForGivenDigits
+2. npm run cook-ts --problem=LeetCode/MonthlyChallenge/Sep2020/largestTimeForGivenDigits
+
+
+# Resources and Links
+
+
 # Learning JavaScript
 
 
