@@ -4,6 +4,7 @@
   "description": "Tracking programming challenge solutions @ 1. LeetCode 1. HackerEarth 1. CodeChef",
   "main": "index.js",
   "scripts": {
+    "cook-py": "python3 $npm_config_problem.py",
     "cook-js": "jest $npm_config_problem.spec.js --coverage",
     "cook-ts": "jest $npm_config_problem.spec.js"
   },

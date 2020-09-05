@@ -81,7 +81,7 @@ class Solution:
         dayset = set(days)
         durations = [1, 7, 30]
 
-        @lru_cache(None)
+        @lru_cache()
         def dp(i):
             if i > 365:
                 return 0
