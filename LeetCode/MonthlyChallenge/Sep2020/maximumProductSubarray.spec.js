@@ -33,3 +33,7 @@ test("maxProduct 7", () => {
 test("maxProduct 8", () => {
     expect(maxProduct([-2,3,4,0])).toBe(12);
 });
+
+test("maxProduct 9", () => {
+    expect(maxProduct([0,-2,3,4])).toBe(12);
+});

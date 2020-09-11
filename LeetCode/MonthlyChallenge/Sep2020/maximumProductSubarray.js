@@ -78,4 +78,19 @@ const maxProductInNonZeroArray = (arr) => {
     }
 }
 
-module.exports = maxProduct;
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+const maxProductImproved = function(nums) {
+    let prefix = 1, suffix = 1, max = -Infinity;
+    for(let i = 0; i < nums.length; i++) {
+        prefix = (prefix || 1) * nums[i];
+        suffix = (suffix || 1) * nums[nums.length - i - 1];
+        max = Math.max(max, prefix, suffix);
+    }
+    return (max !== 0) ? max : 0;
+};
+
+module.exports = maxProductImproved;
