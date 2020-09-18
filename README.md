@@ -14,7 +14,7 @@ Storage for resources:
 ### Cheffing commands:
 1. npm run cook-py --problem=LeetCode/MonthlyChallenge/Aug2020/findRightInterval
 1. npm run cook-js --problem=LeetCode/MonthlyChallenge/Sep2020/largestTimeForGivenDigits
-1. npm run cook-ts --problem=LeetCode/MonthlyChallenge/Sep2020/largestTimeForGivenDigits
+1. npm run cook-ts --problem=LeetCode/LeetIndexed/75_sortColors
 
 
 # Resources and Links

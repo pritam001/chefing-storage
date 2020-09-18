@@ -58,4 +58,13 @@ const uniquePaths = function(m, n) {
     return dpArray[dpArray.length - 1];
 };
 
+const uniquePaths2 = function(m, n) {
+    let min = Math.min(m,n), max = Math.max(m,n), res = 1;
+    for(let i = min; i < (max + min - 1); i++) {
+        res *= i;
+        res /= (i - min + 1);
+    }
+    return res;
+};
+
 module.exports = uniquePaths;
