@@ -1,3 +1,4 @@
+const {test, expect} = require("@jest/globals");
 import {LargestTimeForGivenDigits} from './typed_largestTimeForGivenDigits.ts';
 const sum = LargestTimeForGivenDigits.sum;
 

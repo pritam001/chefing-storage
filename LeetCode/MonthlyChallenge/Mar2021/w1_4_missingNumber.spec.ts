@@ -1,6 +1,6 @@
 const {test, expect} = require("@jest/globals");
 
-import {missingNumber} from "./missingNumber";
+import {missingNumber} from "./w1_4_missingNumber";
 
 test("missingNumber 1", () => {
     expect(missingNumber([3,0,1])).toStrictEqual(2);
