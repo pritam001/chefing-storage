@@ -1,4 +1,4 @@
-/***
+/** *
  Combination Sum III
 
  Find all possible combinations of k numbers that add up to a number n,
@@ -27,8 +27,8 @@
  * @param {number} n
  * @return {number[][]}
  */
-const combinationSum3 = function(k, n) {
-    let output = combinationFromArray(k, n, []);
+const combinationSum3 = function (k, n) {
+    const output = combinationFromArray(k, n, []);
     return output;
 };
 
@@ -38,29 +38,28 @@ const combinationSum3 = function(k, n) {
  * @param {number[]} ignoredNums
  * @return {number[][]}
  */
-const combinationFromArray = function(k, n, ignoredNums) {
-    let nums = [1,2,3,4,5,6,7,8,9];
-    let validNums = nums.filter(n => !ignoredNums.includes(n));
-    let combinations = [];
-    if(k > 0 && n > 0 && validNums.length >= k) {
-        if(k === 1 && validNums.includes(n)) {
+const combinationFromArray = function (k, n, ignoredNums) {
+    const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const validNums = nums.filter((n) => !ignoredNums.includes(n));
+    const combinations = [];
+    if (k > 0 && n > 0 && validNums.length >= k) {
+        if (k === 1 && validNums.includes(n)) {
             return [[n]];
-        } else if(k === 1 && !validNums.includes(n)) {
+        } if (k === 1 && !validNums.includes(n)) {
             return [];
-        } else {
-            let selectedNum = validNums[0];
-            let updatedIgnoredNums = [...ignoredNums, selectedNum].sort();
-            // include selectedNum
-            let incSubCombinations = combinationFromArray(k - 1, n - selectedNum, updatedIgnoredNums);
-            incSubCombinations.forEach((comb) => {
-                combinations.push([selectedNum, ...comb].sort());
-            });
-            // exclude selectedNum
-            let excSubCombinations = combinationFromArray(k, n, updatedIgnoredNums);
-            excSubCombinations.forEach((comb) => {
-                combinations.push(comb);
-            });
         }
+        const selectedNum = validNums[0];
+        const updatedIgnoredNums = [...ignoredNums, selectedNum].sort();
+        // include selectedNum
+        const incSubCombinations = combinationFromArray(k - 1, n - selectedNum, updatedIgnoredNums);
+        incSubCombinations.forEach((comb) => {
+            combinations.push([selectedNum, ...comb].sort());
+        });
+        // exclude selectedNum
+        const excSubCombinations = combinationFromArray(k, n, updatedIgnoredNums);
+        excSubCombinations.forEach((comb) => {
+            combinations.push(comb);
+        });
     }
     return combinations;
 };

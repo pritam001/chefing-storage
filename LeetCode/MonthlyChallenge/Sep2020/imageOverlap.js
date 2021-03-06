@@ -1,4 +1,4 @@
-/***
+/** *
  Image Overlap
 
  Two images A and B are given, represented as binary, square matrices of the same size.  (A binary matrix has only 0s and 1s as values.)
@@ -32,7 +32,6 @@
  * @param {number[][]} B
  * @return {number}
  */
-var largestOverlap = function(A, B) {
+const largestOverlap = function (A, B) {
 
 };
-

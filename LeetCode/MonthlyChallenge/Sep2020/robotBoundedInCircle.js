@@ -1,4 +1,4 @@
-/***
+/** *
  * Robot Bounded In Circle
 
  On an infinite plane, a robot initially stands at (0, 0) and faces north.  The robot can receive one of three instructions:
@@ -10,8 +10,6 @@
  The robot performs the instructions given in order, and repeats them forever.
 
  Return true if and only if there exists a circle in the plane such that the robot never leaves the circle.
-
-
 
  Example 1:
 
@@ -35,8 +33,6 @@
  Explanation:
  The robot moves from (0, 0) -> (0, 1) -> (-1, 1) -> (-1, 0) -> (0, 0) -> ...
 
-
-
  Note:
 
  1 <= instructions.length <= 100
@@ -48,23 +44,23 @@
  * @param {string} instructions
  * @return {boolean}
  */
-const isRobotBounded = function(instructions) {
-    let dirArray = [[0, 1], [1, 0], [0, -1], [-1, 0]];
+const isRobotBounded = function (instructions) {
+    const dirArray = [[0, 1], [1, 0], [0, -1], [-1, 0]];
     let dir = [0, 1];
     let dirIndex = 0;
     let pos = [0, 0];
-    for(let i = 0; i < instructions.length; i++) {
-        if(instructions[i] === "G") {
+    for (let i = 0; i < instructions.length; i++) {
+        if (instructions[i] === "G") {
             pos = [pos[0] + dir[0], pos[1] + dir[1]];
         } else {
-            if(instructions[i] === "R") {
+            if (instructions[i] === "R") {
                 dirIndex++;
             } else {
                 dirIndex--;
             }
-            if(dirIndex < 0) {
+            if (dirIndex < 0) {
                 dirIndex = 3;
-            } else if(dirIndex > 3) {
+            } else if (dirIndex > 3) {
                 dirIndex = 0;
             }
             dir = dirArray[dirIndex];

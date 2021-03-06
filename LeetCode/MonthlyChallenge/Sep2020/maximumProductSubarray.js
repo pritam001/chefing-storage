@@ -1,4 +1,4 @@
-/***
+/** *
  Maximum Product Subarray
 
  Given an integer array nums, find the contiguous subarray within an array
@@ -22,13 +22,13 @@
  * @param {number[]} nums
  * @return {number}
  */
-var maxProduct = function(nums) {
-    for(let i = 0; i <nums.length; i++) {
-        if(nums[i] === 0) {
+var maxProduct = function (nums) {
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] === 0) {
             return Math.max(
                 maxProductInNonZeroArray(nums.slice(0, i)),
                 0,
-                maxProduct(nums.slice(i + 1, nums.length))
+                maxProduct(nums.slice(i + 1, nums.length)),
             );
         }
     }
@@ -40,52 +40,46 @@ var maxProduct = function(nums) {
  * @return {number}
  */
 const maxProductInNonZeroArray = (arr) => {
-    if(arr.length === 0) {
+    if (arr.length === 0) {
         return -Infinity;
-    } if(arr.length === 1) {
+    } if (arr.length === 1) {
         return arr[0];
-    } else {
-        let product = 1;
-        let firstNegIndex = -1;
-        let lastNegIndex = -1;
-        for(let i = 0; i < arr.length; i++) {
-            product *= arr[i];
-            if(arr[i] < 0) {
-                if(firstNegIndex < 0) {
-                    firstNegIndex = i;
-                }
-                lastNegIndex = i;
+    }
+    let product = 1;
+    let firstNegIndex = -1;
+    let lastNegIndex = -1;
+    for (let i = 0; i < arr.length; i++) {
+        product *= arr[i];
+        if (arr[i] < 0) {
+            if (firstNegIndex < 0) {
+                firstNegIndex = i;
             }
-        }
-        if(product > 0) {
-            return product;
-        } else {
-            let possibleMaxes = [];
-            if(firstNegIndex !== arr.length - 1) {
-                let leftMulti = arr.slice(0, firstNegIndex + 1).reduce((acc, val) => {
-                    return acc * val;
-                }, 1);
-                possibleMaxes.push(product/leftMulti);
-            }
-            if(lastNegIndex !== 0) {
-                let rightMulti = arr.slice(lastNegIndex, arr.length).reduce((acc, val) => {
-                    return acc * val;
-                }, 1);
-                possibleMaxes.push(product/rightMulti);
-            }
-            return Math.max(...possibleMaxes);
+            lastNegIndex = i;
         }
     }
-}
-
+    if (product > 0) {
+        return product;
+    }
+    const possibleMaxes = [];
+    if (firstNegIndex !== arr.length - 1) {
+        const leftMulti = arr.slice(0, firstNegIndex + 1).reduce((acc, val) => acc * val, 1);
+        possibleMaxes.push(product / leftMulti);
+    }
+    if (lastNegIndex !== 0) {
+        const rightMulti = arr.slice(lastNegIndex, arr.length).reduce((acc, val) => acc * val, 1);
+        possibleMaxes.push(product / rightMulti);
+    }
+    return Math.max(...possibleMaxes);
+};
 
 /**
  * @param {number[]} nums
  * @return {number}
  */
-const maxProductImproved = function(nums) {
-    let prefix = 1, suffix = 1, max = -Infinity;
-    for(let i = 0; i < nums.length; i++) {
+const maxProductImproved = function (nums) {
+    let prefix = 1; let suffix = 1; let
+        max = -Infinity;
+    for (let i = 0; i < nums.length; i++) {
         prefix = (prefix || 1) * nums[i];
         suffix = (suffix || 1) * nums[nums.length - i - 1];
         max = Math.max(max, prefix, suffix);

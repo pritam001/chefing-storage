@@ -1,12 +1,10 @@
-/***
+/** *
  A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
 
  The robot can only move either down or right at any point in time. The robot is trying to reach
  the bottom-right corner of the grid (marked 'Finish' in the diagram below).
 
  How many possible unique paths are there?
-
-
 
  Example 1:
 
@@ -33,8 +31,6 @@
  Input: m = 3, n = 3
  Output: 6
 
-
-
  Constraints:
 
  1 <= m, n <= 100
@@ -47,20 +43,21 @@
  * @param {number} n
  * @return {number}
  */
-const uniquePaths = function(m, n) {
-    let dpArray = new Array(Math.min(m, n));
+const uniquePaths = function (m, n) {
+    const dpArray = new Array(Math.min(m, n));
     dpArray.fill(1);
-    for(let i = 2; i <= Math.max(m, n); i++) {
-        for(let j = 1; j < dpArray.length; j++) {
+    for (let i = 2; i <= Math.max(m, n); i++) {
+        for (let j = 1; j < dpArray.length; j++) {
             dpArray[j] = dpArray[j - 1] + dpArray[j];
         }
     }
     return dpArray[dpArray.length - 1];
 };
 
-const uniquePaths2 = function(m, n) {
-    let min = Math.min(m,n), max = Math.max(m,n), res = 1;
-    for(let i = min; i < (max + min - 1); i++) {
+const uniquePaths2 = function (m, n) {
+    const min = Math.min(m, n); const max = Math.max(m, n); let
+        res = 1;
+    for (let i = min; i < (max + min - 1); i++) {
         res *= i;
         res /= (i - min + 1);
     }

@@ -1,4 +1,4 @@
-/***
+/** *
  Insert Interval
 
  Given a set of non-overlapping intervals, insert a new interval into the intervals (merge if necessary).
@@ -22,16 +22,16 @@
  * @param {number[]} newInterval
  * @return {number[][]}
  */
-const insert = function(intervals, newInterval) {
-    let updatedIntervals = [];
+const insert = function (intervals, newInterval) {
+    const updatedIntervals = [];
     let mergedInterval = newInterval;
     let isMergedIntervalPushed = false;
-    for(let i = 0; i < intervals.length; i++) {
-        let interval = intervals[i];
-        if(interval[1] < mergedInterval[0]) {
+    for (let i = 0; i < intervals.length; i++) {
+        const interval = intervals[i];
+        if (interval[1] < mergedInterval[0]) {
             updatedIntervals.push(interval);
-        } else if(mergedInterval[1] < interval[0]) {
-            if(!isMergedIntervalPushed) {
+        } else if (mergedInterval[1] < interval[0]) {
+            if (!isMergedIntervalPushed) {
                 updatedIntervals.push(mergedInterval);
                 isMergedIntervalPushed = true;
             }
@@ -40,7 +40,7 @@ const insert = function(intervals, newInterval) {
             mergedInterval = [Math.min(mergedInterval[0], interval[0]), Math.max(mergedInterval[1], interval[1])];
         }
     }
-    if(!isMergedIntervalPushed) {
+    if (!isMergedIntervalPushed) {
         updatedIntervals.push(mergedInterval);
     }
     return updatedIntervals;

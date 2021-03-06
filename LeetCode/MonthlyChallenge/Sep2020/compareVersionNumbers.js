@@ -1,4 +1,4 @@
-/***
+/** *
  Compare Version Numbers
 
  Compare two version numbers version1 and version2.
@@ -11,8 +11,6 @@
  For instance, 2.5 is not "two and a half" or "half way to version three", it is the fifth second-level revision of the second first-level revision.
 
  You may assume the default revision number for each level of a version number to be 0. For example, version number 3.4 has a revision number of 3 and 4 for its first and second level revision number. Its third and fourth level revision number are both 0.
-
-
 
  Example 1:
 
@@ -41,8 +39,6 @@
  Output: 0
  Explanation: The first version number does not have a third level revision number, which means its third level revision number is default to "0"
 
-
-
  Note:
 
  Version strings are composed of numeric strings separated by dots . and this numeric strings may have leading zeroes.
@@ -55,33 +51,35 @@
  * @param {string} version2
  * @return {number}
  */
-var compareVersion = function(version1, version2) {
+const compareVersion = function (version1, version2) {
     const len1 = version1.length;
     const len2 = version2.length;
-    let i = 0, j = 0;
-    let vi = 0, vj = 0;
-    let ei = false, ej = false;
-    while(i <= len1 || j <= len2) {
+    let i = 0; let
+        j = 0;
+    let vi = 0; let
+        vj = 0;
+    let ei = false; let
+        ej = false;
+    while (i <= len1 || j <= len2) {
         ei = true; ej = true;
-        if(i < len1 && version1[i] !== ".") {
+        if (i < len1 && version1[i] !== ".") {
             vi = vi * 10 + parseInt(version1[i]);
             i++;
             ei = false;
         }
-        if(j < len2 && version2[j] !== ".") {
+        if (j < len2 && version2[j] !== ".") {
             vj = vj * 10 + parseInt(version2[j]);
             j++;
             ej = false;
         }
-        if(ei && ej) {
-            if(vi > vj) {
+        if (ei && ej) {
+            if (vi > vj) {
                 return 1;
-            } else if(vi < vj) {
+            } if (vi < vj) {
                 return -1;
-            } else {
-                vi = 0; i++;
-                vj = 0; j++;
             }
+            vi = 0; i++;
+            vj = 0; j++;
         }
     }
     return 0;

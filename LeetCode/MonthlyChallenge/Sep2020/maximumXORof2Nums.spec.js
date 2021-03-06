@@ -1,4 +1,4 @@
-const {test} = require("@jest/globals");
+const { test } = require("@jest/globals");
 
 const findMaximumXOR = require("./maximumXORof2Nums");
 

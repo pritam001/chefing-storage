@@ -1,4 +1,4 @@
-/***
+/** *
  Bulls and Cows
 
  You are playing the following Bulls and Cows game with your friend: You write down a number and ask your friend to guess what the number is.
@@ -32,32 +32,33 @@
  * @param {string} guess
  * @return {string}
  */
-var getHint = function(secret, guess) {
-    let map = {};
-    for(let i = 0; i <= 9; i++) {
+const getHint = function (secret, guess) {
+    const map = {};
+    for (let i = 0; i <= 9; i++) {
         map[i.toString()] = 0;
     }
-    let countA = 0, countB = 0;
-    for(let index in secret) {
-        if(secret.hasOwnProperty(index)) {
-            if(secret[index] === guess[index]) {
+    let countA = 0; let
+        countB = 0;
+    for (const index in secret) {
+        if (secret.hasOwnProperty(index)) {
+            if (secret[index] === guess[index]) {
                 countA++;
             } else {
                 map[secret[index]] += 1;
             }
         }
     }
-    for(let index in guess) {
-        if(guess.hasOwnProperty(index)) {
-            if(guess[index] !== secret[index]) {
-                if(map[guess[index]] > 0) {
+    for (const index in guess) {
+        if (guess.hasOwnProperty(index)) {
+            if (guess[index] !== secret[index]) {
+                if (map[guess[index]] > 0) {
                     map[guess[index]] -= 1;
                     countB++;
                 }
             }
         }
     }
-    return countA + "A" + countB + "B";
+    return `${countA}A${countB}B`;
 };
 
 module.exports = getHint;

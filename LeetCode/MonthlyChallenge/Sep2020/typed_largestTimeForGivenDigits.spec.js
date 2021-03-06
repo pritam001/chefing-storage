@@ -1,11 +1,13 @@
-const {test, expect} = require("@jest/globals");
-import {LargestTimeForGivenDigits} from './typed_largestTimeForGivenDigits.ts';
-const sum = LargestTimeForGivenDigits.sum;
+import { LargestTimeForGivenDigits } from "./typed_largestTimeForGivenDigits.ts";
 
-test('basic', () => {
+const { test, expect } = require("@jest/globals");
+
+const { sum } = LargestTimeForGivenDigits;
+
+test("basic", () => {
     expect(sum()).toBe(0);
 });
 
-test('basic again', () => {
+test("basic again", () => {
     expect(sum(1, 2)).toBe(3);
 });

@@ -1,10 +1,8 @@
-/***
+/** *
  Missing Number
  Given an array nums containing n distinct numbers in the range [0, n], return the only number in the range that is missing from the array.
 
  Follow up: Could you implement a solution using only O(1) extra space complexity and O(n) runtime complexity?
-
-
 
  Example 1:
 
@@ -27,7 +25,6 @@
  Output: 1
  Explanation: n = 1 since there is 1 number, so all numbers are in the range [0,1]. 1 is the missing number in the range since it does not appear in nums.
 
-
  Constraints:
 
  n == nums.length
@@ -38,11 +35,11 @@
 
 function missingNumber(nums: number[]): number {
     let sum = 0;
-    let n = nums.length;
-    for (let num of nums) {
+    const n = nums.length;
+    for (const num of nums) {
         sum += num;
     }
-    return n*(n + 1)/2 - sum;
+    return n * (n + 1) / 2 - sum;
 }
 
 export { missingNumber };

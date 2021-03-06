@@ -1,4 +1,4 @@
-/***
+/** *
  House Robber
 
  You are a professional robber planning to rob houses along a street.
@@ -10,8 +10,6 @@
  Given a list of non-negative integers representing the amount of money
  of each house, determine the maximum amount of money you can rob tonight
  without alerting the police.
-
-
 
  Example 1:
 
@@ -27,8 +25,6 @@
  Explanation: Rob house 1 (money = 2), rob house 3 (money = 9) and rob house 5 (money = 1).
  Total amount you can rob = 2 + 9 + 1 = 12.
 
-
-
  Constraints:
 
  0 <= nums.length <= 100
@@ -40,10 +36,10 @@
  * @param {number[]} nums
  * @return {number}
  */
-const rob = function(nums) {
-    let moneyArray = {"-2": 0, "-1": 0};
-    for(let i = 0; i < nums.length; i++) {
-        moneyArray[i.toString()] = Math.max(nums[i] + moneyArray[(i-2).toString()], 0 + moneyArray[(i - 1).toString()]);
+const rob = function (nums) {
+    const moneyArray = { "-2": 0, "-1": 0 };
+    for (let i = 0; i < nums.length; i++) {
+        moneyArray[i.toString()] = Math.max(nums[i] + moneyArray[(i - 2).toString()], 0 + moneyArray[(i - 1).toString()]);
     }
     return moneyArray[(nums.length - 1).toString()];
 };

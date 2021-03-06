@@ -1,4 +1,4 @@
-/***
+/** *
  980. Unique Paths III
  Hard
 
@@ -10,8 +10,6 @@
  -1 represents obstacles that we cannot walk over.
 
  Return the number of 4-directional walks from the starting square to the ending square, that walk over every non-obstacle square exactly once.
-
-
 
  Example 1:
 
@@ -39,8 +37,6 @@
  There is no path that walks over every empty square exactly once.
  Note that the starting and ending square can be anywhere in the grid.
 
-
-
  Note:
 
  1 <= grid.length * grid[0].length <= 20
@@ -51,28 +47,29 @@
  * @param {number[][]} grid
  * @return {number}
  */
-const uniquePathsIII = function(grid) {
-    if(grid.length === 0 || grid[0].length === 0) {
+const uniquePathsIII = function (grid) {
+    if (grid.length === 0 || grid[0].length === 0) {
         return 0;
     }
-    let start, end, zeroes = 0;
-    let rows = grid.length;
-    let cols = grid[0].length;
-    for(let i = 0; i < rows; i++) {
-        for(let j = 0; j < cols; j++) {
-            if(grid[i][j] === 0) {
+    let start; let end; let
+        zeroes = 0;
+    const rows = grid.length;
+    const cols = grid[0].length;
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < cols; j++) {
+            if (grid[i][j] === 0) {
                 zeroes++;
             }
-            if(grid[i][j] === 1) {
+            if (grid[i][j] === 1) {
                 start = [i, j];
             }
-            if(grid[i][j] === 2) {
+            if (grid[i][j] === 2) {
                 end = [i, j];
             }
         }
     }
     return noOfPathsGivenStartAndEnd(grid, start, end, zeroes);
-}
+};
 
 /**
  * @param {number[][]} grid
@@ -81,16 +78,16 @@ const uniquePathsIII = function(grid) {
  * @param {number} zeroes
  * @return {number}
  */
-const noOfPathsGivenStartAndEnd = function(grid, start, end, zeroes) {
-    if(start[0] === end[0] && start[1] === end[1] && zeroes === 0) {
+const noOfPathsGivenStartAndEnd = function (grid, start, end, zeroes) {
+    if (start[0] === end[0] && start[1] === end[1] && zeroes === 0) {
         return 1;
     }
     let temp;
     let up = 0;
-    let newGrid = grid;
+    const newGrid = grid;
     newGrid[start[0]][start[1]] = -2;
-    if(start[0] - 1 >= 0) {
-        if(newGrid[start[0] - 1][start[1]] >= 0) {
+    if (start[0] - 1 >= 0) {
+        if (newGrid[start[0] - 1][start[1]] >= 0) {
             temp = newGrid[start[0] - 1][start[1]];
             newGrid[start[0] - 1][start[1]] = 1;
             up = noOfPathsGivenStartAndEnd(newGrid, [start[0] - 1, start[1]], end, zeroes - (temp === 0 ? 1 : 0));
@@ -98,8 +95,8 @@ const noOfPathsGivenStartAndEnd = function(grid, start, end, zeroes) {
         }
     }
     let down = 0;
-    if(start[0] + 1 <  grid.length) {
-        if(newGrid[start[0] + 1][start[1]] >= 0) {
+    if (start[0] + 1 < grid.length) {
+        if (newGrid[start[0] + 1][start[1]] >= 0) {
             temp = newGrid[start[0] + 1][start[1]];
             newGrid[start[0] + 1][start[1]] = 1;
             down = noOfPathsGivenStartAndEnd(newGrid, [start[0] + 1, start[1]], end, zeroes - (temp === 0 ? 1 : 0));
@@ -107,8 +104,8 @@ const noOfPathsGivenStartAndEnd = function(grid, start, end, zeroes) {
         }
     }
     let left = 0;
-    if(start[1] - 1 >= 0) {
-        if(newGrid[start[0]][start[1] - 1] >= 0) {
+    if (start[1] - 1 >= 0) {
+        if (newGrid[start[0]][start[1] - 1] >= 0) {
             temp = newGrid[start[0]][start[1] - 1];
             newGrid[start[0]][start[1] - 1] = 1;
             left = noOfPathsGivenStartAndEnd(newGrid, [start[0], start[1] - 1], end, zeroes - (temp === 0 ? 1 : 0));
@@ -116,8 +113,8 @@ const noOfPathsGivenStartAndEnd = function(grid, start, end, zeroes) {
         }
     }
     let right = 0;
-    if(start[1] + 1 <  grid[0].length) {
-        if(newGrid[start[0]][start[1] + 1] >= 0) {
+    if (start[1] + 1 < grid[0].length) {
+        if (newGrid[start[0]][start[1] + 1] >= 0) {
             temp = newGrid[start[0]][start[1] + 1];
             newGrid[start[0]][start[1] + 1] = 1;
             right = noOfPathsGivenStartAndEnd(newGrid, [start[0], start[1] + 1], end, zeroes - (temp === 0 ? 1 : 0));
@@ -125,6 +122,6 @@ const noOfPathsGivenStartAndEnd = function(grid, start, end, zeroes) {
         }
     }
     return up + down + left + right;
-}
+};
 
 module.exports = uniquePathsIII;

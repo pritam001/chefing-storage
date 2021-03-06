@@ -1,11 +1,9 @@
-/***
+/** *
  All Elements in Two Binary Search Trees
 
  Given two binary search trees root1 and root2.
 
  Return a list containing all the integers from both trees sorted in ascending order.
-
-
 
  Example 1:
 
@@ -32,13 +30,10 @@
  Input: root1 = [1,null,8], root2 = [8,1]
  Output: [1,1,8,8]
 
-
-
  Constraints:
 
  Each tree has at most 5000 nodes.
  Each node's value is between [-10^5, 10^5].
-
 
  */
 
@@ -51,41 +46,41 @@
  * }
  */
 function TreeNode(val, left, right) {
-    this.val = (val===undefined ? 0 : val)
-    this.left = (left===undefined ? null : left)
-    this.right = (right===undefined ? null : right)
+    this.val = (val === undefined ? 0 : val);
+    this.left = (left === undefined ? null : left);
+    this.right = (right === undefined ? null : right);
 }
 
 /**
  * @param {TreeNode} root
  * return {number[]}
  */
-const bstToArray = function(root) {
-    if(root === undefined || root == null || root.val == null) {
+const bstToArray = function (root) {
+    if (root === undefined || root == null || root.val == null) {
         return [];
-    } else {
-        let left = bstToArray(root.left);
-        let middle = [root.val];
-        let right = bstToArray(root.right);
-        return left.concat(middle, right);
     }
-}
+    const left = bstToArray(root.left);
+    const middle = [root.val];
+    const right = bstToArray(root.right);
+    return left.concat(middle, right);
+};
 
 /**
  * @param {TreeNode} root1
  * @param {TreeNode} root2
  * @return {number[]}
  */
-var getAllElements = function(root1, root2) {
-    let sorted_array_1 = bstToArray(root1);
-    let sorted_array_2 = bstToArray(root2);
-    let elements = [];
-    let i = 0, j = 0;
-    while(i < sorted_array_1.length || j < sorted_array_2.length) {
-        if(sorted_array_1[i] < sorted_array_2[j] || j >= sorted_array_2.length) {
+const getAllElements = function (root1, root2) {
+    const sorted_array_1 = bstToArray(root1);
+    const sorted_array_2 = bstToArray(root2);
+    const elements = [];
+    let i = 0; let
+        j = 0;
+    while (i < sorted_array_1.length || j < sorted_array_2.length) {
+        if (sorted_array_1[i] < sorted_array_2[j] || j >= sorted_array_2.length) {
             elements.push(sorted_array_1[i]);
             i++;
-        } else if(sorted_array_1[i] >= sorted_array_2[j] || i >= sorted_array_1.length) {
+        } else if (sorted_array_1[i] >= sorted_array_2[j] || i >= sorted_array_1.length) {
             elements.push(sorted_array_2[j]);
             j++;
         }
@@ -100,33 +95,33 @@ var getAllElements = function(root1, root2) {
  * @param {number} n
  * @return TreeNode
  */
-const createBinarySearchTreeFromArray = function(arr, tree, i, n) {
+const createBinarySearchTreeFromArray = function (arr, tree, i, n) {
     let root;
-    if(i < n) {
+    if (i < n) {
         root = new TreeNode(arr[i]);
         root.left = createBinarySearchTreeFromArray(arr, root.left, 2 * i + 1, n);
         root.right = createBinarySearchTreeFromArray(arr, root.right, 2 * i + 2, n);
     }
     return root;
-}
+};
 
 /**
  * @param {number[]} arr1
  * @param {number[]} arr2
  * @return number[]
  */
-const allElementsInTwoBinarySearchTrees = function(arr1, arr2) {
+const allElementsInTwoBinarySearchTrees = function (arr1, arr2) {
     let bst1 = null;
     bst1 = createBinarySearchTreeFromArray(arr1, bst1, 0, arr1.length);
-    if(bst1 === undefined) {
+    if (bst1 === undefined) {
         bst1 = null;
     }
     let bst2 = null;
     bst2 = createBinarySearchTreeFromArray(arr2, bst2, 0, arr2.length);
-    if(bst2 === undefined) {
+    if (bst2 === undefined) {
         bst2 = null;
     }
     return getAllElements(bst1, bst2);
-}
+};
 
 module.exports = allElementsInTwoBinarySearchTrees;
