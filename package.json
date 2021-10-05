@@ -6,7 +6,9 @@
     "scripts": {
         "cook-py": "python3 $npm_config_problem.py",
         "cook-js": "jest $npm_config_problem.spec.js --coverage",
-        "cook-ts": "jest $npm_config_problem.spec.ts"
+        "cook-ts": "jest $npm_config_problem.spec.ts",
+        "view-ts": "prettier $npm_config_problem.ts $npm_config_problem.spec.ts --check && eslint $npm_config_problem.ts $npm_config_problem.spec.ts",
+        "garnish-ts": "prettier $npm_config_problem.ts $npm_config_problem.spec.ts --write && eslint $npm_config_problem.ts $npm_config_problem.spec.ts --fix"
     },
     "repository": {
         "type": "git",

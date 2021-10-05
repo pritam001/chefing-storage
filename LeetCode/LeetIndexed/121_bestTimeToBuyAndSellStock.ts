@@ -26,7 +26,17 @@
  */
 
 function maxProfit(prices: number[]): number {
-    return 0;
+    let maxGain = 0;
+    let maxPrice = prices[prices.length - 1];
+    // eslint-disable-next-line no-plusplus
+    for (let i = prices.length - 1; i >= 0; i--) {
+        const currentPrice = prices[i];
+        if (currentPrice > maxPrice) {
+            maxPrice = currentPrice;
+        }
+        maxGain = Math.max(maxGain, maxPrice - currentPrice);
+    }
+    return maxGain;
 }
 
 export default maxProfit;
